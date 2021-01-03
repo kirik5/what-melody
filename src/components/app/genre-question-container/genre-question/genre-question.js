@@ -1,70 +1,81 @@
 import React from "react";
-// import PropTypes from "prop-types";
-import AudioPlayer from "../../audio-player/audio-player.js";
-import Mistakes from "../../mistakes/mistakes";
-import Timer from "../../timer/timer";
+import PropTypes from "prop-types";
+import TimerContainer from "../../timer/timer-container";
+import MistakesContainer from "../../mistakes/mistakes-container";
+import AudioPlayerContainer from "../../audio-player/audio-player-container";
+import BackToStartContainer from "../../back-to-start-container/back-to-start-container";
 
-const GenreQuestion = ({time, activeQuestion, mistakes, players, playing, loading, timeUpdating, nextQuestion, addAnswer, answers, maxTime}) => {
+const GenreQuestion = ({activeQuestion, numberOfActivePlayer, onPlayButtonClick, checkedAnswers, setAnswers, onAnswerButtonClick}) => {
 
-  const goToNextQuestion = (evt) => {
-    evt.preventDefault();
+    const goToNextQuestion = (evt) => {
+        evt.preventDefault();
+        onAnswerButtonClick(activeQuestion, checkedAnswers);
+    };
 
-    nextQuestion(activeQuestion, answers);
-  }
+    const playButtonClickHandler = (i) => {
+        if (numberOfActivePlayer === i) {
+            onPlayButtonClick(-1)
+        } else {
+            onPlayButtonClick(i)
+        }
+    };
 
-  return (
-    <section className="game game--genre">
-      <header className="game__header" style={{justifyContent: 'center'}}>
-        <a className="game__back" href="/">
-          <span className="visually-hidden">Сыграть ещё раз</span>
-          <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
-        </a>
+    const setCheckedAnswers = (i) => {
+        const newCheckedAnswers = [...checkedAnswers];
+        newCheckedAnswers[i] = !checkedAnswers[i];
+        setAnswers(newCheckedAnswers);
+    };
 
-        <Timer
-          time={time}
-          maxTime={maxTime}
-        />
 
-        <Mistakes
-          numberOfMistakes={mistakes}
-        />
+    return (
+        <section className="game game--genre">
+            <header className="game__header" style={{justifyContent: 'center'}}>
 
-      </header>
-      <section className="game__screen">
-        <h2 className="game__title">Выберите {activeQuestion.genre}-треки</h2>
-        <form className="game__tracks" onSubmit={goToNextQuestion}>
-          {activeQuestion.answers.map((it, i) => {
-            return (
-              <div key={`answer-${i}`} className="track">
+                <BackToStartContainer/>
 
-                <AudioPlayer
-                  src={it.src}
-                  isPlaying={players[i].isPlaying}
-                  isLoading={players[i].isLoading}
-                  onPlayButtonClick={() => playing(i)}
-                  onLoadTrack={() => loading(i)}
-                  onTimeUpdate={(time) => timeUpdating(i, time)}
-                  // onEndedPlaying={() => endedPlaying(i)}
-                />
+                <TimerContainer/>
 
-                <div className="game__answer">
-                  <input className="game__input visually-hidden" type="checkbox" name="answer" value={`answer-${i}`} id={`answer-${i}`} onClick={() => addAnswer(i)}/>
-                  <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
-                </div>
-              </div>
-            );
-          })}
-          <button className="game__submit button" type="submit">Ответить</button>
-        </form>
-      </section>
-    </section>
-  )
+                <MistakesContainer/>
+
+            </header>
+            <section className="game__screen">
+                <h2 className="game__title">Выберите {activeQuestion.genre}-треки</h2>
+                <form className="game__tracks" onSubmit={goToNextQuestion}>
+                    {activeQuestion.answers.map((it, i) => {
+                        return (
+                            <div key={`answer-${i}`} className="track">
+
+                                <AudioPlayerContainer
+                                    src={it.src}
+                                    isPlaying={numberOfActivePlayer === i}
+                                    onPlayButtonClick={() => playButtonClickHandler(i)}
+                                />
+
+                                <div className="game__answer">
+                                    <input className="game__input visually-hidden" type="checkbox" name="answer"
+                                           value={`answer-${i}`} id={`answer-${i}`}
+                                           onChange={() => setCheckedAnswers(i)}
+                                           checked={checkedAnswers[i]}/>
+                                    <label className="game__check" htmlFor={`answer-${i}`}>Отметить</label>
+                                </div>
+                            </div>
+                        );
+                    })}
+                    <button className="game__submit button" type="submit">Ответить</button>
+                </form>
+            </section>
+        </section>
+    )
 }
 
 
-// GenreQuestion.propTypes = {
-//   question: PropTypes.object.isRequired,
-//
-// };
+GenreQuestion.propTypes = {
+    activeQuestion: PropTypes.object.isRequired,
+    numberOfActivePlayer: PropTypes.number.isRequired,
+    onPlayButtonClick: PropTypes.func.isRequired,
+    checkedAnswers: PropTypes.array.isRequired,
+    setAnswers: PropTypes.func.isRequired,
+    onAnswerButtonClick: PropTypes.func.isRequired,
+};
 
 export default GenreQuestion;

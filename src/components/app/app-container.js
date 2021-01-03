@@ -1,17 +1,32 @@
-// import React from "react";
-import {connect} from "react-redux";
+import React from "react";
+import {useSelector} from "react-redux";
+import {createSelector} from "@reduxjs/toolkit";
 import App from "./app";
 
-const mapStateToProps = (state) => {
-  return {
-    activeQuestionNumber: state.questionReducer.numberOfActiveQuestion,
-    mistakes: state.mistakesReducer.countOfMistakes,
-    maxMistakes: state.mistakesReducer.maxMistakes,
-    questions: state.questionReducer.questions,
-    time: state.timeReducer.currentTime,
-  }
+
+const endGame = createSelector(
+    state => state.timer.currentTime,
+    currentTime => !!currentTime,
+);
+
+const AppContainer = (props) => {
+    const activeQuestionNumber = useSelector(state => state.questions.numberOfActiveQuestion);
+    const mistakes = useSelector(state => state.mistakes.countOfMistakes);
+    const maxMistakes = useSelector(state => state.mistakes.maxMistakes);
+    const questions = useSelector(state => state.questions.questions);
+
+
+    const wilEndGame = useSelector(endGame);
+
+    return (
+        <App
+            activeQuestionNumber={activeQuestionNumber}
+            mistakes={mistakes}
+            maxMistakes={maxMistakes}
+            questions={questions}
+            wilEndGame={wilEndGame}
+        />
+    )
 };
 
-
-
-export default connect(mapStateToProps, null)(App);
+export default AppContainer;

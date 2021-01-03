@@ -1,54 +1,50 @@
+import React, {useState} from "react";
 import ArtistQuestion from "./artist-question/artist-question";
-import {connect} from "react-redux";
-import {
-  // endedPlayingActionCreator,
-  loadedTrackActionCreator,
-  activePlayerActionCreator,
-  resetPlayingActionCreator,
-  updateTimeToPlayActionCreator
-} from "../../../reducers/audio-player-reducer";
-import {nextQuestionActionCreator} from "../../../reducers/question-reducer";
-import {pushAnswerActionCreator} from "../../../reducers/all-answers-reducer";
-import {addMistakesActionCreator} from "../../../reducers/mistakes-reducer";
+import {useSelector, useDispatch} from "react-redux";
+import {createSelector} from "@reduxjs/toolkit";
+import {addActiveQuestionNumber} from "../../../reducers/question-slice";
+import {pushAnswer} from "../../../reducers/answers-slice";
+import {addMistakes} from "../../../reducers/mistakes-slice";
 
-const mapStateToProps = (state) => {
-  return {
-    time: state.timeReducer.currentTime,
-    maxTime: state.timeReducer.maxTime,
-    activeQuestion: state.questionReducer.questions[state.questionReducer.numberOfActiveQuestion],
-    mistakes: state.mistakesReducer.countOfMistakes,
-    player: state.audioPlayerReducer.player,
-
-  }
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    playing: () => {
-      dispatch(activePlayerActionCreator());
-    },
-    loading: () => {
-      dispatch(loadedTrackActionCreator());
-    },
-    timeUpdating: (time) => {
-      dispatch(updateTimeToPlayActionCreator(time));
-    },
-    // endedPlaying: (i) => {
-    //   dispatch(endedPlayingActionCreator(i))
-    // },
-    nextQuestion: (activeQuestion, artist) => {
-      let answer = takeAnswerFromArtistQuestion(activeQuestion, artist);
-      if (!answer) {dispatch(addMistakesActionCreator())};
-      dispatch(pushAnswerActionCreator(answer));
-      dispatch(resetPlayingActionCreator());
-      dispatch(nextQuestionActionCreator());
-    },
-  }
-};
 
 const takeAnswerFromArtistQuestion = (activeQuestion, artist) => {
+    return activeQuestion.song.artist === artist;
+};
 
-  return activeQuestion.song.artist === artist;
-}
+const activeQuestionSelector = createSelector(
+    state => state.questions.questions,
+    state => state.questions.numberOfActiveQuestion,
+    (questions, number) => questions[number]
+);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArtistQuestion);
+const ArtistQuestionContainer = (props) => {
+    const activeQuestion = useSelector(activeQuestionSelector);
+    const [numberOfActivePlayer, setActivePlayer] = useState(-1);
+
+    const dispatch = useDispatch();
+
+    const answerHandler = (activeQuestion, artist) => {
+        return (dispatch) => {
+            const answer = takeAnswerFromArtistQuestion(activeQuestion, artist);
+            if (!answer) {dispatch(addMistakes())}
+            dispatch(pushAnswer(answer));
+            dispatch(addActiveQuestionNumber());
+        }
+    };
+
+    const onAnswerButtonClick = (activeQuestion, answers) => {
+        dispatch(answerHandler(activeQuestion, answers));
+    };
+
+
+    return (
+        <ArtistQuestion
+            activeQuestion={activeQuestion}
+            numberOfActivePlayer={numberOfActivePlayer}
+            onPlayButtonClick={setActivePlayer}
+            onAnswerButtonClick={onAnswerButtonClick}
+        />
+    )
+};
+
+export default ArtistQuestionContainer;

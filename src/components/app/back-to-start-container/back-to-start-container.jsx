@@ -1,14 +1,14 @@
 import React from "react";
-import Error from "./error/error";
+import BackToStart from "./back-to-start/back-to-start";
 import {useDispatch} from "react-redux";
+import useTimerId from "../userHooks/useTimerId";
 import {clearAnswers} from "../../../reducers/answers-slice";
 import {resetMistakes} from "../../../reducers/mistakes-slice";
 import {resetTimer} from "../../../reducers/time-slice";
 import {resetGame} from "../../../reducers/question-slice";
-import useTimerId from "../userHooks/useTimerId";
 
+const BackToStartContainer = (props) => {
 
-const ErrorContainer = () => {
     const dispatch = useDispatch();
 
     const id = useTimerId();
@@ -24,13 +24,16 @@ const ErrorContainer = () => {
         dispatch(resetGame());
     };
 
+    const goToStartGame = () => {
+        timerOff();
+        restartGameHandler();
+    };
 
     return (
-        <Error
-            onRestartGame={restartGameHandler}
-            timerOff={timerOff}
+        <BackToStart
+            goToStartGame={goToStartGame}
         />
     )
 };
 
-export default ErrorContainer;
+export default BackToStartContainer;

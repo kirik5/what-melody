@@ -1,19 +1,28 @@
 import React from "react";
-import {store} from "../../../../index";
+import PropTypes from "prop-types";
 
-const Result = ({restartGame}) => {
-  clearTimeout(store.getState().timeReducer.timerId);
 
-  return (
-    <section className="result">
-      <div className="result__logo">
-        <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
-      </div>
-      <h2 className="result__title">Вы настоящий меломан!</h2>
-      <p className="result__total">Вы ответили правильно на 6 вопросов и совершили 2 ошибки</p>
-      <button className="replay" type="button" onClick={restartGame}>Сыграть ещё раз</button>
-    </section>
-  )
+const Result = ({onRestartGame, timerOff, countOfRightAnswers, countOfMistakes}) => {
+
+    timerOff();
+
+    return (
+        <section className="result">
+            <div className="result__logo">
+                <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
+            </div>
+            <h2 className="result__title">Вы настоящий меломан!</h2>
+            <p className="result__total">Вы ответили правильно на {countOfRightAnswers} вопросов и совершили {countOfMistakes} ошибки</p>
+            <button className="replay" type="button" onClick={onRestartGame}>Сыграть ещё раз</button>
+        </section>
+    )
+};
+
+Result.propTypes = {
+    onRestartGame: PropTypes.func.isRequired,
+    timerOff: PropTypes.func.isRequired,
+    countOfRightAnswers: PropTypes.number.isRequired,
+    countOfMistakes: PropTypes.number.isRequired,
 };
 
 export default Result;

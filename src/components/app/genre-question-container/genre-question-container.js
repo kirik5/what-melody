@@ -1,63 +1,59 @@
 import GenreQuestion from "./genre-question/genre-question";
-import {connect} from "react-redux";
-import {
-  // endedPlayingActionCreator,
-  loadedTrackAllActionCreator,
-  newActivePlayerActionCreator,
-  resetPlayingAllActionCreator,
-  updateTimeToPlayAllActionCreator
-} from "../../../reducers/audio-players-reducer";
-import {nextQuestionActionCreator} from "../../../reducers/question-reducer";
-import {addAnswerActionCreator, clearAnswerActionCreator} from "../../../reducers/genre-answer-reducer";
-import {pushAnswerActionCreator} from "../../../reducers/all-answers-reducer";
-import {addMistakesActionCreator} from "../../../reducers/mistakes-reducer";
+import {createSelector} from "@reduxjs/toolkit";
+import {useSelector, useDispatch} from "react-redux";
+import {addActiveQuestionNumber} from "../../../reducers/question-slice";
+import {pushAnswer} from "../../../reducers/answers-slice";
+import {addMistakes} from "../../../reducers/mistakes-slice";
+import React, {useState} from "react";
 
-const mapStateToProps = (state) => {
-  return {
-    time: state.timeReducer.currentTime,
-    maxTime: state.timeReducer.maxTime,
-    activeQuestion: state.questionReducer.questions[state.questionReducer.numberOfActiveQuestion],
-    mistakes: state.mistakesReducer.countOfMistakes,
-    players: state.audioPlayersReducer.players,
-    answers: state.genreAnswerReducer.answers,
-  }
-};
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    playing: (i) => {
-      dispatch(newActivePlayerActionCreator(i));
-    },
-    loading: (i) => {
-      dispatch(loadedTrackAllActionCreator(i));
-    },
-    timeUpdating: (i, time) => {
-      dispatch(updateTimeToPlayAllActionCreator(i, time));
-    },
-    // endedPlaying: (i) => {
-    //   dispatch(endedPlayingActionCreator(i))
-    // },
-    nextQuestion: (activeQuestion, answers) => {
-
-      let answer = takeAnswerFromGenreQuestion(activeQuestion, answers);
-      if (!answer) {dispatch(addMistakesActionCreator())};
-      dispatch(pushAnswerActionCreator(answer));
-      dispatch(resetPlayingAllActionCreator());
-      dispatch(clearAnswerActionCreator());
-      dispatch(nextQuestionActionCreator());
-    },
-    addAnswer: (i) => {
-      dispatch(addAnswerActionCreator(i));
-    }
-  }
-};
 
 const takeAnswerFromGenreQuestion = (activeQuestion, answers) => {
-  const rightAnswers = activeQuestion.answers.map(it => {
-    return it.genre === activeQuestion.genre;
-  });
+    const rightAnswers = activeQuestion.answers.map(it => {
+        return it.genre === activeQuestion.genre;
+    });
 
-  return rightAnswers.every((it, i) => it === answers[i]);
-}
+    return rightAnswers.every((it, i) => it === answers[i]);
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(GenreQuestion);
+const activeQuestionSelector = createSelector(
+    state => state.questions.questions,
+    state => state.questions.numberOfActiveQuestion,
+    (questions, number) => questions[number]
+);
+
+const GenreQuestionContainer = (props) => {
+    const activeQuestion = useSelector(activeQuestionSelector);
+    const [numberOfActivePlayer, setActivePlayer] = useState(-1);
+    const [checkedAnswers, setAnswers] = useState([false, false, false, false]);
+
+    const dispatch = useDispatch();
+
+    const answerHandler = (activeQuestion, answers) => {
+        return (dispatch) => {
+            const answer = takeAnswerFromGenreQuestion(activeQuestion, answers);
+            if (!answer) {
+                dispatch(addMistakes())
+            }
+            dispatch(pushAnswer(answer));
+            dispatch(addActiveQuestionNumber());
+        }
+    };
+
+    const onAnswerButtonClick = (activeQuestion, answers) => {
+        dispatch(answerHandler(activeQuestion, answers));
+    };
+
+
+    return (
+        <GenreQuestion
+            activeQuestion={activeQuestion}
+            numberOfActivePlayer={numberOfActivePlayer}
+            onPlayButtonClick={setActivePlayer}
+            checkedAnswers={checkedAnswers}
+            setAnswers={setAnswers}
+            onAnswerButtonClick={onAnswerButtonClick}
+        />
+    )
+};
+
+export default GenreQuestionContainer;
