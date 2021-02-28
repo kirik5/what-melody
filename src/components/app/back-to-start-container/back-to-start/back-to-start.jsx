@@ -17,8 +17,9 @@ const BackToStart = ({goToStartGame}) => {
     )
 };
 
+export default BackToStart;
+
+
 BackToStart.propTypes = {
     goToStartGame: PropTypes.func.isRequired,
-}
-
-export default BackToStart;
+};

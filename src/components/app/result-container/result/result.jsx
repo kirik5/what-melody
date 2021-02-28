@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
 
 
 const Result = ({onRestartGame, timerOff, countOfRightAnswers, countOfMistakes}) => {
+    const dispatch = useDispatch();
 
-    timerOff();
+    dispatch(timerOff());
 
     return (
         <section className="result">

@@ -6,7 +6,6 @@ import {clearAnswers} from "../../../reducers/answers-slice";
 import {resetMistakes} from "../../../reducers/mistakes-slice";
 import {resetTimer} from "../../../reducers/time-slice";
 import {resetGame} from "../../../reducers/question-slice";
-import useTimerId from "../userHooks/useTimerId";
 
 const ResultContainer = () => {
 
@@ -20,9 +19,8 @@ const ResultContainer = () => {
 
     const dispatch = useDispatch();
 
-    const id = useTimerId();
-
-    const timerOff = () => {
+    const timerOff = () => (dispatch, getState) => {
+        const id = getState().timer.timerId;
         clearTimeout(id);
     };
 
@@ -36,9 +34,9 @@ const ResultContainer = () => {
     return (
         <Result
             onRestartGame={restartGameHandler}
-            timerOff={timerOff}
             countOfRightAnswers={countOfRightAnswers}
             countOfMistakes={countOfMistakes}
+            timerOff={timerOff}
         />
     )
 };

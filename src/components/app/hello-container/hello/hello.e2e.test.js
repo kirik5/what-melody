@@ -1,7 +1,8 @@
-import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-import Hello from './hello.js';
+import React from "react";
+import Enzyme, {shallow} from "enzyme";
+import Adapter from "enzyme-adapter-react-16";
+import Hello from "./hello.jsx";
+
 
 Enzyme.configure({adapter: new Adapter()});
 
@@ -10,8 +11,8 @@ describe('ТЕСТИРУЕМ КОМПОНЕНТ HELLO...', () => {
 
   const hello = shallow(<Hello
     time={5}
-    errors={3}
-    buttonClickHandler={clickHandler}
+    maxMistakes={3}
+    startGameHandler={clickHandler}
   />);
 
   it(`Проверяем нажатие на кнопку...`, () => {
@@ -21,7 +22,6 @@ describe('ТЕСТИРУЕМ КОМПОНЕНТ HELLO...', () => {
   });
 
   it(`Ищем параграф и проверяем его текст`, () => {
-    console.log(hello.find(`p.welcome__text`).first().text());
     expect(hello.find(`p.welcome__text`).first().text()).toBe(`Правила просты:`);
   });
 

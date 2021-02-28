@@ -5,15 +5,13 @@ import {clearAnswers} from "../../../reducers/answers-slice";
 import {resetMistakes} from "../../../reducers/mistakes-slice";
 import {resetTimer} from "../../../reducers/time-slice";
 import {resetGame} from "../../../reducers/question-slice";
-import useTimerId from "../userHooks/useTimerId";
 
 
 const ErrorContainer = () => {
     const dispatch = useDispatch();
 
-    const id = useTimerId();
-
-    const timerOff = () => {
+    const timerOff = () => (dispatch, getState) => {
+        const id = getState().timer.timerId;
         clearTimeout(id);
     };
 

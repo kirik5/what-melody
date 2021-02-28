@@ -6,7 +6,7 @@ import App from "./app";
 
 const endGame = createSelector(
     state => state.timer.currentTime,
-    currentTime => !!currentTime,
+    currentTime => !currentTime,
 );
 
 const AppContainer = (props) => {
@@ -16,7 +16,7 @@ const AppContainer = (props) => {
     const questions = useSelector(state => state.questions.questions);
 
 
-    const wilEndGame = useSelector(endGame);
+    const willEndGame = useSelector(endGame);
 
     return (
         <App
@@ -24,7 +24,7 @@ const AppContainer = (props) => {
             mistakes={mistakes}
             maxMistakes={maxMistakes}
             questions={questions}
-            wilEndGame={wilEndGame}
+            willEndGame={willEndGame}
         />
     )
 };

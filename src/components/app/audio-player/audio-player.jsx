@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import PropTypes from 'prop-types';
 
 
-const AudioPlayer = ({src, isPlaying, isLoading, setLoadingStatus, onPlayButtonClick}) => {
+const AudioPlayer = ({src, isLoading, setLoadingStatus, isPlaying, changePlayer}) => {
 
     const audioRef = useRef(null);
 
@@ -26,7 +26,7 @@ const AudioPlayer = ({src, isPlaying, isLoading, setLoadingStatus, onPlayButtonC
             audio.ontimeupdate = null;
             audio.src = ``;
         }
-    }, [src, isPlaying, isLoading, setLoadingStatus]);
+    }, [src, isLoading, isPlaying, setLoadingStatus]);
 
     return (
         <>
@@ -34,7 +34,7 @@ const AudioPlayer = ({src, isPlaying, isLoading, setLoadingStatus, onPlayButtonC
                 className={`track__button track__button--${isPlaying ? `pause` : `play`}`}
                 type="button"
                 disabled={isLoading}
-                onClick={onPlayButtonClick}
+                onClick={changePlayer}
             />
             <div className="track__status">
                 <audio
@@ -50,7 +50,7 @@ AudioPlayer.propTypes = {
     isPlaying: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     setLoadingStatus: PropTypes.func.isRequired,
-    onPlayButtonClick: PropTypes.func.isRequired,
+    changePlayer: PropTypes.func.isRequired,
 };
 
 export default AudioPlayer;

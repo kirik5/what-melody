@@ -1,9 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {useDispatch} from "react-redux";
 
 const Error = ({onRestartGame, timerOff}) => {
 
-    timerOff();
+    const dispatch = useDispatch();
+
+    dispatch(timerOff());
 
     return (
         <section className="result">

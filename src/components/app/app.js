@@ -6,9 +6,9 @@ import ArtistQuestionContainer from "./artist-question-container/artist-question
 import ErrorContainer from "./error-container/error-container";
 import ResultContainer from "./result-container/result-container";
 
-const App = ({activeQuestionNumber, mistakes, maxMistakes, questions, wilEndGame}) => {
+const App = ({activeQuestionNumber, mistakes, maxMistakes, questions, willEndGame}) => {
 
-    const getScreen = (activeQuestionNumber, mistakes, maxMistakes, questions, wilEndGame) => {
+    const getScreen = (activeQuestionNumber, mistakes, maxMistakes, questions, willEndGame) => {
         if (activeQuestionNumber === -1) {
             return (
                 <HelloContainer/>
@@ -16,22 +16,18 @@ const App = ({activeQuestionNumber, mistakes, maxMistakes, questions, wilEndGame
         }
 
 
-        if ((mistakes < maxMistakes) && (wilEndGame)) {
+        if ((mistakes < maxMistakes) && (!willEndGame)) {
             if (questions.length > activeQuestionNumber) {
 
                 if (questions[activeQuestionNumber].type === `genre`) {
                     return (
-                        <GenreQuestionContainer
-                            key={activeQuestionNumber}
-                        />
+                        <GenreQuestionContainer/>
                     )
                 }
 
                 if (questions[activeQuestionNumber].type === `artist`) {
                     return (
-                        <ArtistQuestionContainer
-                            key={activeQuestionNumber}
-                        />
+                        <ArtistQuestionContainer/>
                     )
                 }
 
@@ -43,7 +39,7 @@ const App = ({activeQuestionNumber, mistakes, maxMistakes, questions, wilEndGame
         }
     };
 
-    return getScreen(activeQuestionNumber, mistakes, maxMistakes, questions, wilEndGame);
+    return getScreen(activeQuestionNumber, mistakes, maxMistakes, questions, willEndGame);
 };
 
 App.propTypes = {
@@ -51,7 +47,7 @@ App.propTypes = {
     mistakes: PropTypes.number.isRequired,
     maxMistakes: PropTypes.number.isRequired,
     questions: PropTypes.array.isRequired,
-    wilEndGame: PropTypes.bool.isRequired,
+    willEndGame: PropTypes.bool.isRequired,
 }
 
 export default App;
