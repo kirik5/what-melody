@@ -6,6 +6,7 @@ import ArtistQuestionContainer from "./artist-question-container/artist-question
 import ErrorContainer from "./error-container/error-container";
 import ResultContainer from "./result-container/result-container";
 
+
 const App = ({numberOfActiveQuestion, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion}) => {
 
     const getScreen = (numberOfActiveQuestion, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion) => {

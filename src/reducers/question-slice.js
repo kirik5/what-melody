@@ -1,5 +1,5 @@
 import questions from "../mocks/questions";
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
 import instance from "../api";
 
 
@@ -44,37 +44,23 @@ export const {addActiveQuestionNumber, resetGame} = questionSlice.actions;
 
 export default questionSlice.reducer;
 
+export const getQuestionsStatus = state => state.questions.status;
 
-// const ADD_NUMBER_OF_ACTIVE_QUESTION = 'ADD_NUMBER_OF_ACTIVE_QUESTION';
-// const RESET_GAME = 'RESET_GAME';
-//
-// const initialState = {
-//     numberOfActiveQuestion: -1,
-//     questions: questions,
-// };
-//
-// export const questionReducer = (state = initialState, action) => {
-//     switch (action.type) {
-//         case ADD_NUMBER_OF_ACTIVE_QUESTION:
-//             return {
-//                 ...state,
-//                 numberOfActiveQuestion: state.numberOfActiveQuestion + 1,
-//             };
-//         case RESET_GAME:
-//             return initialState;
-//         default:
-//             return state;
-//     }
-// }
-//
-// export const nextQuestionActionCreator = () => (
-//     {
-//         type: ADD_NUMBER_OF_ACTIVE_QUESTION,
-//     }
-// );
-//
-// export const resetGameActionCreator = () => (
-//     {
-//         type: RESET_GAME,
-//     }
-// );
+export const getNumberOfActiveQuestion = state => state.questions.numberOfActiveQuestion;
+
+export const isNotEndOfQuestions = createSelector(
+    getNumberOfActiveQuestion,
+    state => state.questions.questions.length,
+    (numberOfActiveQuestion, lengthOfQuestions) => lengthOfQuestions > numberOfActiveQuestion,
+);
+
+export const getTypeOfQuestion = createSelector(
+    getNumberOfActiveQuestion,
+    state => state.questions.questions,
+    (numberOfActiveQuestion, questions) => {
+        const activeQuestion = questions[numberOfActiveQuestion];
+        if (activeQuestion) {
+            return activeQuestion.type;
+        }
+    }
+);
