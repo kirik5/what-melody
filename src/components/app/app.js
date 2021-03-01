@@ -6,26 +6,32 @@ import ArtistQuestionContainer from "./artist-question-container/artist-question
 import ErrorContainer from "./error-container/error-container";
 import ResultContainer from "./result-container/result-container";
 
-const App = ({activeQuestionNumber, mistakes, maxMistakes, questions, willEndGame}) => {
+const App = ({numberOfActiveQuestion, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion}) => {
 
-    const getScreen = (activeQuestionNumber, mistakes, maxMistakes, questions, willEndGame) => {
-        if (activeQuestionNumber === -1) {
+    const getScreen = (numberOfActiveQuestion, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion) => {
+
+        if (statusOfFetchingQuestions === "loading") {
+            return (
+                <div>Loading...</div>
+            )
+        }
+
+        if (numberOfActiveQuestion === -1) {
             return (
                 <HelloContainer/>
             )
         }
 
+        if (isNotGameOver) {
+            if (isNotEndOfQuestions) {
 
-        if ((mistakes < maxMistakes) && (!willEndGame)) {
-            if (questions.length > activeQuestionNumber) {
-
-                if (questions[activeQuestionNumber].type === `genre`) {
+                if (typeOfQuestion === `genre`) {
                     return (
                         <GenreQuestionContainer/>
                     )
                 }
 
-                if (questions[activeQuestionNumber].type === `artist`) {
+                if (typeOfQuestion === `artist`) {
                     return (
                         <ArtistQuestionContainer/>
                     )
@@ -39,15 +45,15 @@ const App = ({activeQuestionNumber, mistakes, maxMistakes, questions, willEndGam
         }
     };
 
-    return getScreen(activeQuestionNumber, mistakes, maxMistakes, questions, willEndGame);
+    return getScreen(numberOfActiveQuestion, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion);
 };
 
 App.propTypes = {
-    activeQuestionNumber: PropTypes.number.isRequired,
-    mistakes: PropTypes.number.isRequired,
-    maxMistakes: PropTypes.number.isRequired,
-    questions: PropTypes.array.isRequired,
-    willEndGame: PropTypes.bool.isRequired,
+    numberOfActiveQuestion: PropTypes.number.isRequired,
+    isNotEndOfQuestions: PropTypes.bool.isRequired,
+    isNotGameOver: PropTypes.bool.isRequired,
+    statusOfFetchingQuestions: PropTypes.string.isRequired,
+    typeOfQuestion: PropTypes.string,
 }
 
 export default App;

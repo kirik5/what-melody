@@ -1,8 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import AppContainer from "./components/app/app-container";
-import {Provider} from "react-redux";
+import {Provider, useDispatch} from "react-redux";
 import store from "./reducers/store";
+import {fetchQuestions} from "./reducers/question-slice";
 
 
 const init = (store) => {

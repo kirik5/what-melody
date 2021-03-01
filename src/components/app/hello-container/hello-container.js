@@ -3,6 +3,7 @@ import Hello from "./hello/hello";
 import {useSelector, useDispatch} from "react-redux";
 import {addActiveQuestionNumber} from "../../../reducers/question-slice";
 import {startTimer} from "../../../reducers/time-slice";
+import instance from "../../../api";
 
 
 const HelloContainer = () => {
@@ -14,6 +15,11 @@ const HelloContainer = () => {
         dispatch(addActiveQuestionNumber());
         dispatch(startTimer);
     };
+
+    // const getQuestionsFromServer = () => {
+    //     instance.get("/questions")
+    //         .then(request => console.log(request.data));
+    // };
 
     return (
         <Hello

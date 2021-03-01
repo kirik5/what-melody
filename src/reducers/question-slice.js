@@ -1,11 +1,18 @@
 import questions from "../mocks/questions";
-import {createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+import instance from "../api";
 
 
 const initialState = {
     numberOfActiveQuestion: -1,
     questions: questions,
+    status: 'idle',
 };
+
+export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async () => {
+    const response = await instance.get("/questions");
+    return response.data;
+});
 
 const questionSlice = createSlice({
     name: 'questions',
@@ -16,7 +23,20 @@ const questionSlice = createSlice({
         },
         resetGame(state) {
             return initialState;
-        }
+        },
+        getQuestions(state) {
+            return state.questions = instance("/question")
+        },
+    },
+    extraReducers: builder => {
+        builder
+            .addCase(fetchQuestions.pending, (state, action) => {
+                state.status = 'loading'
+            })
+            .addCase(fetchQuestions.fulfilled, (state, action) => {
+                state.questions = action.payload;
+                state.status = 'idle';
+            })
     },
 });
 
