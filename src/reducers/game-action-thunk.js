@@ -1,7 +1,7 @@
 import {addActiveQuestionNumber, allQuestions, getNumberOfActiveQuestion} from "./question-slice";
 import {startTimer} from "./time-slice";
 import {addMistakes} from "./mistakes-slice";
-import {genreAnswers, genreUserAnswers, pushAnswer} from "./answers-slice";
+import {genreUserAnswers, pushAnswer} from "./answers-slice";
 import {genreAnswersClear} from "./genre-answers-slice";
 import {allPlayersOff} from "./active-player-slice";
 
@@ -27,7 +27,7 @@ export const genreAnswerHandler = () => {
         const answer = takeAnswerFromGenreQuestion(answers, rightAnswer, userAnswers);
         if (!answer) {
             dispatch(addMistakes())
-        };
+        }
         dispatch(pushAnswer(answer));
         dispatch(genreAnswersClear());
         dispatch(allPlayersOff());

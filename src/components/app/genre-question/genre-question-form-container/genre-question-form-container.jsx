@@ -5,7 +5,7 @@ import {getAnswers, getGenre} from "../../../../reducers/question-slice";
 import {genreAnswerHandler} from "../../../../reducers/game-action-thunk";
 
 
-const GenreQuestionFormContainer = (props) => {
+const GenreQuestionFormContainer = () => {
 
     const answers = useSelector(getAnswers);
     const genre = useSelector(getGenre);
