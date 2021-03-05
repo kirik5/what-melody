@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import AnswerChecked from "./answer-checked";
 import {createSelector} from "@reduxjs/toolkit";
 import {useDispatch, useSelector} from "react-redux";
-import {changeGenreAnswers} from "../../../../../../../reducers/genre-answers-slice";
+import {changeGenreAnswers} from "../../../../../../reducers/genre-answers-slice";
 
 const AnswerCheckedContainer = ({id}) => {
 

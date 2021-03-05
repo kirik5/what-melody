@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import HelloContainer from "./hello-container/hello-container";
-import GenreQuestionContainer from "./genre-question-container/genre-question-container";
 import ArtistQuestionContainer from "./artist-question-container/artist-question-container";
 import ErrorContainer from "./error-container/error-container";
 import ResultContainer from "./result-container/result-container";
+import GenreQuestion from "./genre-question/genre-question.js";
 
 
 const App = ({isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion}) => {
@@ -29,7 +29,7 @@ const App = ({isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchin
 
                 if (typeOfQuestion === `genre`) {
                     return (
-                        <GenreQuestionContainer/>
+                        <GenreQuestion/>
                     )
                 }
 

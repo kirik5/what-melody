@@ -44,9 +44,12 @@ export const {addActiveQuestionNumber, resetGame} = questionSlice.actions;
 
 export default questionSlice.reducer;
 
+
 export const getQuestionsStatus = state => state.questions.status;
 
 export const getNumberOfActiveQuestion = state => state.questions.numberOfActiveQuestion;
+
+export const allQuestions = state => state.questions.questions;
 
 export const isNotEndOfQuestions = createSelector(
     getNumberOfActiveQuestion,
@@ -54,13 +57,17 @@ export const isNotEndOfQuestions = createSelector(
     (numberOfActiveQuestion, lengthOfQuestions) => lengthOfQuestions > numberOfActiveQuestion,
 );
 
-export const getTypeOfQuestion = createSelector(
+export const getActiveQuestion = createSelector(
     getNumberOfActiveQuestion,
-    state => state.questions.questions,
-    (numberOfActiveQuestion, questions) => {
-        const activeQuestion = questions[numberOfActiveQuestion];
-        if (activeQuestion) {
-            return activeQuestion.type;
+    allQuestions,
+    (numberOfActiveQuestion, questions) => questions[numberOfActiveQuestion],
+);
+
+export const getTypeOfQuestion = createSelector(
+    getActiveQuestion,
+    question => {
+        if (question) {
+            return question.type;
         }
         return null;
     }
@@ -74,4 +81,14 @@ export const isStartScreen = createSelector(
         }
         return false;
     }
+);
+
+export const getAnswers = createSelector(
+    getActiveQuestion,
+    question => question.answers,
+);
+
+export const getGenre = createSelector(
+    getActiveQuestion,
+    question => question.genre,
 );
