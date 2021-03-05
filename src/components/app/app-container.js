@@ -4,9 +4,8 @@ import {createSelector} from "@reduxjs/toolkit";
 import App from "./app";
 import {
     fetchQuestions,
-    getNumberOfActiveQuestion,
     getQuestionsStatus, getTypeOfQuestion,
-    isNotEndOfQuestions
+    isNotEndOfQuestions, isStartScreen
 } from "../../reducers/question-slice";
 import {getMaxMistakes, getMistakes} from "../../reducers/mistakes-slice";
 import {getCurrentTime} from "../../reducers/time-slice";
@@ -20,20 +19,20 @@ const isNotGameOver = createSelector(
 );
 
 const AppContainer = (props) => {
-    const numberOfActiveQuestion = useSelector(getNumberOfActiveQuestion);
     const notEndOfQuestions = useSelector(isNotEndOfQuestions);
     const notGameOver = useSelector(isNotGameOver);
     const statusOfFetchingQuestions = useSelector(getQuestionsStatus);
     const typeOfQuestion = useSelector(getTypeOfQuestion);
+    const StartScreen = useSelector(isStartScreen);
     const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(fetchQuestions());
-    // }, []);
+    useEffect(() => {
+        // dispatch(fetchQuestions());
+    }, []);
 
     return (
         <App
-            numberOfActiveQuestion={numberOfActiveQuestion}
+            isStartScreen={StartScreen}
             isNotEndOfQuestions={notEndOfQuestions}
             isNotGameOver={notGameOver}
             statusOfFetchingQuestions={statusOfFetchingQuestions}

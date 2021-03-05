@@ -62,5 +62,16 @@ export const getTypeOfQuestion = createSelector(
         if (activeQuestion) {
             return activeQuestion.type;
         }
+        return null;
+    }
+);
+
+export const isStartScreen = createSelector(
+    getNumberOfActiveQuestion,
+    numberOfActiveQuestion => {
+        if (numberOfActiveQuestion === -1) {
+            return true;
+        }
+        return false;
     }
 );

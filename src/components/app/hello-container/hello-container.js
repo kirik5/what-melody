@@ -1,9 +1,9 @@
 import React from "react";
 import Hello from "./hello/hello";
 import {useSelector, useDispatch} from "react-redux";
-import {addActiveQuestionNumber} from "../../../reducers/question-slice";
-import {getCurrentTime, startTimer} from "../../../reducers/time-slice";
+import {getCurrentTime} from "../../../reducers/time-slice";
 import {getMaxMistakes} from "../../../reducers/mistakes-slice";
+import {startGameHandler} from "../../../reducers/game-action-thunk";
 
 
 const HelloContainer = () => {
@@ -11,16 +11,15 @@ const HelloContainer = () => {
     const maxMistakes = useSelector(getMaxMistakes);
     const dispatch = useDispatch();
 
-    const startGameHandler = () => {
-        dispatch(addActiveQuestionNumber());
-        dispatch(startTimer());
+    const startGame = () => {
+        dispatch(startGameHandler());
     };
 
     return (
         <Hello
             time={time}
             maxMistakes={maxMistakes}
-            startGameHandler={startGameHandler}
+            startGameHandler={startGame}
         />
     )
 };

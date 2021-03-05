@@ -7,9 +7,9 @@ import ErrorContainer from "./error-container/error-container";
 import ResultContainer from "./result-container/result-container";
 
 
-const App = ({numberOfActiveQuestion, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion}) => {
+const App = ({isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion}) => {
 
-    const getScreen = (numberOfActiveQuestion, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion) => {
+    const getScreen = (isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion) => {
 
         if (statusOfFetchingQuestions === "loading") {
             return (
@@ -17,13 +17,14 @@ const App = ({numberOfActiveQuestion, isNotEndOfQuestions, isNotGameOver, status
             )
         }
 
-        if (numberOfActiveQuestion === -1) {
+        if (isStartScreen) {
             return (
                 <HelloContainer/>
             )
         }
 
         if (isNotGameOver) {
+
             if (isNotEndOfQuestions) {
 
                 if (typeOfQuestion === `genre`) {
@@ -46,11 +47,11 @@ const App = ({numberOfActiveQuestion, isNotEndOfQuestions, isNotGameOver, status
         }
     };
 
-    return getScreen(numberOfActiveQuestion, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion);
+    return getScreen(isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion);
 };
 
 App.propTypes = {
-    numberOfActiveQuestion: PropTypes.number.isRequired,
+    isStartScreen: PropTypes.bool.isRequired,
     isNotEndOfQuestions: PropTypes.bool.isRequired,
     isNotGameOver: PropTypes.bool.isRequired,
     statusOfFetchingQuestions: PropTypes.string.isRequired,
