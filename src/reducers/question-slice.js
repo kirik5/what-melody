@@ -24,9 +24,6 @@ const questionSlice = createSlice({
         resetGame() {
             return initialState;
         },
-        getQuestions(state) {
-            return state.questions = instance("/question")
-        },
     },
     extraReducers: builder => {
         builder

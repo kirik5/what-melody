@@ -1,13 +1,13 @@
 import React, {
-    // useEffect
+    useEffect
 } from "react";
 import {
-    // useDispatch,
+    useDispatch,
     useSelector} from "react-redux";
 import {createSelector} from "@reduxjs/toolkit";
 import App from "./app";
 import {
-    // fetchQuestions,
+    fetchQuestions,
     getQuestionsStatus, getTypeOfQuestion,
     isNotEndOfQuestions, isStartScreen
 } from "../../reducers/question-slice";
@@ -28,11 +28,11 @@ const AppContainer = () => {
     const statusOfFetchingQuestions = useSelector(getQuestionsStatus);
     const typeOfQuestion = useSelector(getTypeOfQuestion);
     const StartScreen = useSelector(isStartScreen);
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(fetchQuestions());
-    // }, []);
+    useEffect(() => {
+        dispatch(fetchQuestions());
+    }, []);
 
     return (
         <App
