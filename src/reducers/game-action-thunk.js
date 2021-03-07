@@ -1,7 +1,13 @@
-import {addActiveQuestionNumber, allQuestions, getNumberOfActiveQuestion} from "./question-slice";
-import {startTimer} from "./time-slice";
-import {addMistakes} from "./mistakes-slice";
-import {pushAnswer} from "./answers-slice";
+import {
+    addActiveQuestionNumber,
+    allQuestions,
+    fetchQuestions,
+    getNumberOfActiveQuestion,
+    resetGame
+} from "./question-slice";
+import {getCurrentTime, resetTimer, startTimer} from "./time-slice";
+import {addMistakes, getMaxMistakes, getMistakes, resetMistakes} from "./mistakes-slice";
+import {clearAnswers, pushAnswer} from "./answers-slice";
 import {genreAnswersClear, genreUserAnswers} from "./genre-answers-slice";
 import {allPlayersOff} from "./active-player-slice";
 import {createSelector} from "@reduxjs/toolkit";
@@ -10,6 +16,13 @@ export const startGameHandler = () => (dispatch) => {
     dispatch(addActiveQuestionNumber());
     dispatch(startTimer());
 };
+
+export const isNotGameOver = createSelector(
+    getMistakes,
+    getMaxMistakes,
+    getCurrentTime,
+    (countOfMistakes, maxMistakes, currentTime) => (countOfMistakes < maxMistakes) && (currentTime > 0),
+);
 
 const takeAnswerFromGenreQuestion = (answers, rightAnswer, userAnswers) => {
     const rightAnswers = answers.map(it => {
@@ -60,3 +73,19 @@ export const checkedId = (id) => createSelector(
     genreAnswers,
     checkedArray => checkedArray[id],
 );
+
+export const timerOff = () => (dispatch, getState) => {
+    const id = getState().timer.timerId;
+    clearTimeout(id);
+};
+
+export const restartGameHandler = () => (dispatch) => {
+    dispatch(timerOff());
+    dispatch(resetTimer());
+    dispatch(allPlayersOff());
+    dispatch(genreAnswersClear());
+    dispatch(clearAnswers());
+    dispatch(resetMistakes());
+    dispatch(resetGame());
+    dispatch(fetchQuestions());
+};

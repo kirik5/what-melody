@@ -1,6 +1,6 @@
 import React from "react";
 import TimerContainer from "../timer/timer-container";
-import MistakesContainer from "../mistakes/mistakes-container";
+import MistakesContainer from "../mistakes-container/mistakes-container";
 import BackToStartContainer from "../back-to-start-container/back-to-start-container";
 import ArtistQuestionFormContainer from "./artist-question-form-container/artist-question-form-container";
 
