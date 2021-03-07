@@ -5,7 +5,7 @@ import AnswerButtonContainer from "./answer-button-container/answer-button-conta
 
 const ArtistQuestionForm = ({answers}) => {
 
-    const dontSendFormData = (evt) => evt.preventDefault();
+    const dontSendFormData = evt => evt.preventDefault();
 
     return (
         <form className="game__artist" onSubmit={dontSendFormData}>

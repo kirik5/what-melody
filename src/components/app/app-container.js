@@ -1,9 +1,13 @@
-import React, {useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, {
+    // useEffect
+} from "react";
+import {
+    // useDispatch,
+    useSelector} from "react-redux";
 import {createSelector} from "@reduxjs/toolkit";
 import App from "./app";
 import {
-    fetchQuestions,
+    // fetchQuestions,
     getQuestionsStatus, getTypeOfQuestion,
     isNotEndOfQuestions, isStartScreen
 } from "../../reducers/question-slice";
@@ -18,17 +22,17 @@ const isNotGameOver = createSelector(
     (countOfMistakes, maxMistakes, currentTime) => (countOfMistakes < maxMistakes) && (currentTime > 0),
 );
 
-const AppContainer = (props) => {
+const AppContainer = () => {
     const notEndOfQuestions = useSelector(isNotEndOfQuestions);
     const notGameOver = useSelector(isNotGameOver);
     const statusOfFetchingQuestions = useSelector(getQuestionsStatus);
     const typeOfQuestion = useSelector(getTypeOfQuestion);
     const StartScreen = useSelector(isStartScreen);
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
-    useEffect(() => {
-        // dispatch(fetchQuestions());
-    }, []);
+    // useEffect(() => {
+    //     dispatch(fetchQuestions());
+    // }, []);
 
     return (
         <App

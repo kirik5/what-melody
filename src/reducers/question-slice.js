@@ -21,7 +21,7 @@ const questionSlice = createSlice({
         addActiveQuestionNumber(state) {
             state.numberOfActiveQuestion += 1;
         },
-        resetGame(state) {
+        resetGame() {
             return initialState;
         },
         getQuestions(state) {
@@ -30,7 +30,7 @@ const questionSlice = createSlice({
     },
     extraReducers: builder => {
         builder
-            .addCase(fetchQuestions.pending, (state, action) => {
+            .addCase(fetchQuestions.pending, (state) => {
                 state.status = 'loading'
             })
             .addCase(fetchQuestions.fulfilled, (state, action) => {
@@ -75,12 +75,8 @@ export const getTypeOfQuestion = createSelector(
 
 export const isStartScreen = createSelector(
     getNumberOfActiveQuestion,
-    numberOfActiveQuestion => {
-        if (numberOfActiveQuestion === -1) {
-            return true;
-        }
-        return false;
-    }
+    numberOfActiveQuestion => (numberOfActiveQuestion === -1)
+
 );
 
 export const getAnswers = createSelector(
@@ -91,4 +87,9 @@ export const getAnswers = createSelector(
 export const getGenre = createSelector(
     getActiveQuestion,
     question => question.genre,
+);
+
+export const getSongSrc = createSelector(
+    getActiveQuestion,
+    question => question.song.src,
 );

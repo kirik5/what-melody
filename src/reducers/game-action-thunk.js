@@ -34,3 +34,21 @@ export const genreAnswerHandler = () => {
         dispatch(addActiveQuestionNumber());
     }
 };
+
+const takeAnswerFromArtistQuestion = (userAnswer, rightArtist) => {
+    return rightArtist === userAnswer;
+};
+
+export const artistAnswerHandler = (userAnswer) => {
+    return (dispatch, getState) => {
+        const numberOfActiveQuestion = getNumberOfActiveQuestion(getState());
+        const rightAnswer = getState().questions.questions[numberOfActiveQuestion].song.artist;
+        const answer = takeAnswerFromArtistQuestion(userAnswer, rightAnswer);
+        if (!answer) {
+            dispatch(addMistakes())
+        }
+        dispatch(pushAnswer(answer));
+        dispatch(allPlayersOff());
+        dispatch(addActiveQuestionNumber());
+    }
+};
