@@ -3,16 +3,13 @@ import PropTypes from 'prop-types';
 
 
 const AudioPlayer = ({src, isLoading, setLoadingStatus, isPlaying, changePlayer}) => {
-
     const audioRef = useRef(null);
 
     useEffect(() => {
         const audio = audioRef.current;
-
         audio.src = src;
         audio.oncanplaythrough = () => setLoadingStatus(false);
         // audio.ontimeupdate = () => this.props.onTimeUpdate(audio.currentTime);
-
         if (isPlaying) {
             audio.play();
         } else {

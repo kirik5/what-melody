@@ -1,9 +1,10 @@
 import {addActiveQuestionNumber, allQuestions, getNumberOfActiveQuestion} from "./question-slice";
 import {startTimer} from "./time-slice";
 import {addMistakes} from "./mistakes-slice";
-import {genreUserAnswers, pushAnswer} from "./answers-slice";
-import {genreAnswersClear} from "./genre-answers-slice";
+import {pushAnswer} from "./answers-slice";
+import {genreAnswersClear, genreUserAnswers} from "./genre-answers-slice";
 import {allPlayersOff} from "./active-player-slice";
+import {createSelector} from "@reduxjs/toolkit";
 
 export const startGameHandler = () => (dispatch) => {
     dispatch(addActiveQuestionNumber());
@@ -52,3 +53,10 @@ export const artistAnswerHandler = (userAnswer) => {
         dispatch(addActiveQuestionNumber());
     }
 };
+
+const genreAnswers = state => state.genreAnswers;
+
+export const checkedId = (id) => createSelector(
+    genreAnswers,
+    checkedArray => checkedArray[id],
+);

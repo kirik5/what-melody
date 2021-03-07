@@ -10,7 +10,7 @@ import {resetGame} from "../../../reducers/question-slice";
 const ResultContainer = () => {
 
     const lengthOfRightAnswersArr = createSelector(
-        state => state.answers.answers.filter(it => it),
+        state => state.answers.filter(it => it),
         answers => answers.length,
     );
     const countOfRightAnswers = useSelector(lengthOfRightAnswersArr);

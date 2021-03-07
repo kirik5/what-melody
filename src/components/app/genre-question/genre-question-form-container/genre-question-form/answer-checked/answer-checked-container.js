@@ -1,21 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import AnswerChecked from "./answer-checked";
-import {createSelector} from "@reduxjs/toolkit";
 import {useDispatch, useSelector} from "react-redux";
 import {changeGenreAnswers} from "../../../../../../reducers/genre-answers-slice";
+import {checkedId} from "../../../../../../reducers/game-action-thunk";
 
 const AnswerCheckedContainer = ({id}) => {
-
-    const checked = createSelector(
-        state => state.genreAnswers.genreAnswers,
-        checkedArray => checkedArray[id],
-    );
-
-    const isChecked = useSelector(checked);
-
+    const isChecked = useSelector(checkedId(id));
     const dispatch = useDispatch();
-
     const changeChecked = () => dispatch(changeGenreAnswers(id));
 
     return (
