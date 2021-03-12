@@ -12,17 +12,8 @@ const initialState = {
 };
 
 export const fetchAuthorization = createAsyncThunk('authorization/fetchAuthorization', async (info) => {
-    // try {
-    //     const response = await serverAPI.authorising(info);
-    //     debugger;
-    //     return response.data;
-    // } catch {
-    //     console.log('error...')
-    // }
-
-    return serverAPI.authorising(info)
-        .then(response => response.data)
-        .catch(err => console.error(err))
+    const response = await serverAPI.authorising(info);
+    return response.data;
 });
 
 const authorizationSlice = createSlice({
@@ -42,13 +33,12 @@ const authorizationSlice = createSlice({
                 state.status = 'loading'
             })
             .addCase(fetchAuthorization.fulfilled, (state, action) => {
-                if (action.payload) {
-                    state.authorizationInfo.id = action.payload.id;
-                    state.authorizationInfo.email = action.payload.email;
-                    state.isAuthorized = true;
-                    state.status = 'idle';
-                }
+                state.authorizationInfo.id = action.payload.id;
+                state.authorizationInfo.email = action.payload.email;
+                state.isAuthorized = true;
+                state.status = 'idle';
             })
+            .addCase(fetchAuthorization.rejected, (state) => state)
     },
 });
 

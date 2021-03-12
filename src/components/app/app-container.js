@@ -26,7 +26,6 @@ const AppContainer = () => {
 
     useEffect(() => {
         if (isAuthorization) {dispatch(fetchQuestions());}
-        console.log('useEffects');
     }, [isAuthorization]);
 
     return (
