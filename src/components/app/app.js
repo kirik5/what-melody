@@ -5,11 +5,14 @@ import ErrorContainer from "./error-container/error-container";
 import ResultContainer from "./result-container/result-container";
 import GenreQuestion from "./genre-question/genre-question.js";
 import ArtistQuestion from "./artist-question/artist-question";
+import LoginContainer from "./login-container/login-container";
 
 
-const App = ({isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion}) => {
+const App = ({isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion, isAuthorization}) => {
 
-    const getScreen = (isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion) => {
+    const getScreen = (isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion, isAuthorization) => {
+
+        if (!isAuthorization) {return <LoginContainer/>}
 
         if (statusOfFetchingQuestions === "loading") {
             return (
@@ -47,7 +50,7 @@ const App = ({isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchin
         }
     };
 
-    return getScreen(isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion);
+    return getScreen(isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion, isAuthorization);
 };
 
 App.propTypes = {
@@ -56,6 +59,7 @@ App.propTypes = {
     isNotGameOver: PropTypes.bool.isRequired,
     statusOfFetchingQuestions: PropTypes.string.isRequired,
     typeOfQuestion: PropTypes.string,
+    isAuthorization: PropTypes.bool.isRequired,
 }
 
 export default App;

@@ -1,6 +1,6 @@
 import questions from "../mocks/questions";
 import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
-import instance from "../api";
+import {serverAPI} from "../api";
 
 
 const initialState = {
@@ -10,7 +10,7 @@ const initialState = {
 };
 
 export const fetchQuestions = createAsyncThunk('questions/fetchQuestions', async () => {
-    const response = await instance.get("/questions");
+    const response = await serverAPI.getQuestions();
     return response.data;
 });
 

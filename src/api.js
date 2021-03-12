@@ -7,4 +7,7 @@ const instance = axios.create({
     withCredentials: true,
 });
 
-export default instance;
+export const serverAPI = {
+    getQuestions: () => instance.get('/questions'),
+    authorising: ({email, password}) => instance.post('/login', {email, password}),
+};

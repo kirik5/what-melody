@@ -5,6 +5,7 @@ import questionReducer from "./question-slice";
 import timeSlice from "./time-slice";
 import activePlayerReducer from "./active-player-slice";
 import genreAnswersReducer from "./genre-answers-slice";
+import authorizationReducer from "./authorization-slice";
 
 
 const store = configureStore({
@@ -15,6 +16,7 @@ const store = configureStore({
         timer: timeSlice,
         activePlayer: activePlayerReducer,
         genreAnswers: genreAnswersReducer,
+        authorization: authorizationReducer,
     }
 });
 

@@ -1,16 +1,17 @@
 import React, {
-    // useEffect
+    useEffect
 } from "react";
 import {
-    // useDispatch,
+    useDispatch,
     useSelector} from "react-redux";
 import App from "./app";
 import {
-    // fetchQuestions,
+    fetchQuestions,
     getQuestionsStatus, getTypeOfQuestion,
     isNotEndOfQuestions, isStartScreen
 } from "../../reducers/question-slice";
 import {isNotGameOver} from "../../reducers/game-action-thunk";
+import {getIsAuthorized} from "../../reducers/authorization-slice";
 
 
 const AppContainer = () => {
@@ -19,11 +20,14 @@ const AppContainer = () => {
     const statusOfFetchingQuestions = useSelector(getQuestionsStatus);
     const typeOfQuestion = useSelector(getTypeOfQuestion);
     const StartScreen = useSelector(isStartScreen);
-    // const dispatch = useDispatch();
+    const isAuthorization = useSelector(getIsAuthorized);
 
-    // useEffect(() => {
-    //     dispatch(fetchQuestions());
-    // }, []);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (isAuthorization) {dispatch(fetchQuestions());}
+        console.log('useEffects');
+    }, [isAuthorization]);
 
     return (
         <App
@@ -32,6 +36,7 @@ const AppContainer = () => {
             isNotGameOver={notGameOver}
             statusOfFetchingQuestions={statusOfFetchingQuestions}
             typeOfQuestion={typeOfQuestion}
+            isAuthorization={isAuthorization}
         />
     )
 };

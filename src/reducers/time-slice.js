@@ -2,8 +2,8 @@ import {createSlice} from "@reduxjs/toolkit";
 
 
 const initialState = {
-    maxTime: 30,
-    currentTime: 30,
+    maxTime: 300,
+    currentTime: 300,
     timerId: null
 };
 
