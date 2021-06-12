@@ -22,10 +22,6 @@ const Hello = ({time, maxMistakes, startGameHandler}) => {
   );
 };
 
-Hello.propTypes = {
-  time: PropTypes.number.isRequired,
-  maxMistakes: PropTypes.number.isRequired,
-  startGameHandler: PropTypes.func.isRequired,
-};
 
-export default Hello;
+
+export default Hello

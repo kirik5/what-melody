@@ -6,6 +6,7 @@ import timeSlice from "./time-slice";
 import activePlayerReducer from "./active-player-slice";
 import genreAnswersReducer from "./genre-answers-slice";
 import authorizationReducer from "./authorization-slice";
+import {reducer} from "redux-form";
 
 
 const store = configureStore({
@@ -17,6 +18,7 @@ const store = configureStore({
         activePlayer: activePlayerReducer,
         genreAnswers: genreAnswersReducer,
         authorization: authorizationReducer,
+        form: reducer,
     }
 });
 

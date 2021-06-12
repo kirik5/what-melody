@@ -1,5 +1,7 @@
-import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {serverAPI} from "../api";
+import {createSlice} from "@reduxjs/toolkit"
+import {serverAPI} from "../api"
+import {stopSubmit} from "redux-form"
+
 
 const initialState = {
     isAuthorized: false,
@@ -9,42 +11,55 @@ const initialState = {
         name: '',
     },
     status: 'idle'
-};
+}
 
-export const fetchAuthorization = createAsyncThunk('authorization/fetchAuthorization', async (info) => {
-    const response = await serverAPI.authorising(info);
-    return response.data;
-});
+
+export const login = (mailPass) => async (dispatch) => {
+    dispatch(loading())
+    try {
+        const response = await serverAPI.authorising(mailPass)
+        dispatch(fulfilled(response.data))
+        window.history.back()
+    } catch (err) {
+        dispatch(stopSubmit('singin', {
+            _error: err,
+        }))
+        dispatch(failed(err))
+    }
+}
+
 
 const authorizationSlice = createSlice({
     name: 'authorization',
     initialState,
     reducers: {
-        addActiveQuestionNumber(state) {
-            state.numberOfActiveQuestion += 1;
+        loading(state) {
+            state.status = 'loading'
         },
-        resetGame() {
-            return initialState;
+        fulfilled(state, action) {
+            state.authorizationInfo.id = action.payload.id
+            state.authorizationInfo.email = action.payload.email
+            state.authorizationInfo.name = action.payload.name
+            state.isAuthorized = true
+            state.status = 'succeeded'
         },
+        failed(state, action) {
+            state.status = 'failed'
+            state.error = action.payload
+        },
+        logout(state) {
+            state.status = 'idle'
+            state.error = null
+            state.user = null
+        }
     },
-    extraReducers: builder => {
-        builder
-            .addCase(fetchAuthorization.pending, (state) => {
-                state.status = 'loading'
-            })
-            .addCase(fetchAuthorization.fulfilled, (state, action) => {
-                state.authorizationInfo.id = action.payload.id;
-                state.authorizationInfo.email = action.payload.email;
-                state.isAuthorized = true;
-                state.status = 'idle';
-            })
-            .addCase(fetchAuthorization.rejected, (state) => state)
-    },
-});
+})
 
-export const {addActiveQuestionNumber, resetGame} = authorizationSlice.actions;
 
-export default authorizationSlice.reducer;
+export const {loading, fulfilled, failed, logout} = authorizationSlice.actions
 
-export const getIsAuthorized = state => state.authorization.isAuthorized;
+export default authorizationSlice.reducer
+
+export const getIsAuthorized = state => state.authorization.isAuthorized
+export const getIsLoading = state => state.authorization.status
 

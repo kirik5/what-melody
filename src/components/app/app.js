@@ -1,23 +1,42 @@
-import React from "react";
-import PropTypes from "prop-types";
-import HelloContainer from "./hello-container/hello-container";
-import ErrorContainer from "./error-container/error-container";
-import ResultContainer from "./result-container/result-container";
-import GenreQuestion from "./genre-question/genre-question.js";
-import ArtistQuestion from "./artist-question/artist-question";
-import LoginContainer from "./login-container/login-container";
+import React, {useEffect} from "react"
+import HelloContainer from "./hello-container/hello-container"
+import ErrorContainer from "./error-container/error-container"
+import ResultContainer from "./result-container/result-container"
+import GenreQuestion from "./genre-question/genre-question.js"
+import ArtistQuestion from "./artist-question/artist-question"
+import {useDispatch, useSelector} from "react-redux"
+import {
+    fetchQuestions,
+    getQuestionsStatus,
+    getTypeOfQuestion,
+    isNotEndOfQuestions,
+    isStartScreen
+} from "../../reducers/question-slice"
+import {isNotGameOver} from "../../reducers/game-action-thunk"
+import {getIsAuthorized} from "../../reducers/authorization-slice"
+import Login from "./login/login"
+import Loading from "./loading/loading";
 
 
-const App = ({isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion, isAuthorization}) => {
+const App = () => {
+    const notEndOfQuestions = useSelector(isNotEndOfQuestions);
+    const notGameOver = useSelector(isNotGameOver);
+    const statusOfFetchingQuestions = useSelector(getQuestionsStatus);
+    const typeOfQuestion = useSelector(getTypeOfQuestion);
+    const startScreen = useSelector(isStartScreen);
+    const authorization = useSelector(getIsAuthorized);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (authorization) {dispatch(fetchQuestions());}
+    }, [authorization, dispatch]);
 
     const getScreen = (isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion, isAuthorization) => {
 
-        if (!isAuthorization) {return <LoginContainer/>}
+        if (!isAuthorization) {return <Login/>}
 
         if (statusOfFetchingQuestions === "loading") {
-            return (
-                <div>Loading...</div>
-            )
+            return <Loading/>
         }
 
         if (isStartScreen) {
@@ -27,9 +46,7 @@ const App = ({isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchin
         }
 
         if (isNotGameOver) {
-
             if (isNotEndOfQuestions) {
-
                 if (typeOfQuestion === `genre`) {
                     return (
                         <GenreQuestion/>
@@ -41,7 +58,6 @@ const App = ({isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchin
                         <ArtistQuestion/>
                     )
                 }
-
             } else {
                 return <ResultContainer/>
             }
@@ -50,16 +66,8 @@ const App = ({isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchin
         }
     };
 
-    return getScreen(isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion, isAuthorization);
-};
-
-App.propTypes = {
-    isStartScreen: PropTypes.bool.isRequired,
-    isNotEndOfQuestions: PropTypes.bool.isRequired,
-    isNotGameOver: PropTypes.bool.isRequired,
-    statusOfFetchingQuestions: PropTypes.string.isRequired,
-    typeOfQuestion: PropTypes.string,
-    isAuthorization: PropTypes.bool.isRequired,
+    return getScreen(startScreen, notEndOfQuestions, notGameOver, statusOfFetchingQuestions, typeOfQuestion, authorization);
 }
 
-export default App;
+
+export default App
