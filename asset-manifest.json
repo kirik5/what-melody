@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/kirik5/what-melody/static/css/main.867f6fe8.chunk.css",
+    "main.js": "/kirik5/what-melody/static/js/main.001a4d2b.chunk.js",
+    "main.js.map": "/kirik5/what-melody/static/js/main.001a4d2b.chunk.js.map",
+    "runtime-main.js": "/kirik5/what-melody/static/js/runtime-main.a4721bba.js",
+    "runtime-main.js.map": "/kirik5/what-melody/static/js/runtime-main.a4721bba.js.map",
+    "static/js/2.ecd9c363.chunk.js": "/kirik5/what-melody/static/js/2.ecd9c363.chunk.js",
+    "static/js/2.ecd9c363.chunk.js.map": "/kirik5/what-melody/static/js/2.ecd9c363.chunk.js.map",
+    "index.html": "/kirik5/what-melody/index.html",
+    "static/css/main.867f6fe8.chunk.css.map": "/kirik5/what-melody/static/css/main.867f6fe8.chunk.css.map",
+    "static/js/2.ecd9c363.chunk.js.LICENSE.txt": "/kirik5/what-melody/static/js/2.ecd9c363.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a4721bba.js",
+    "static/js/2.ecd9c363.chunk.js",
+    "static/css/main.867f6fe8.chunk.css",
+    "static/js/main.001a4d2b.chunk.js"
+  ]
+}
