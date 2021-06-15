@@ -33,7 +33,7 @@ const App = () => {
 
     const getScreen = (isStartScreen, isNotEndOfQuestions, isNotGameOver, statusOfFetchingQuestions, typeOfQuestion, isAuthorization) => {
 
-        if (!isAuthorization) {return <Login/>}
+        // if (!isAuthorization) {return <Login/>}
 
         if (statusOfFetchingQuestions === "loading") {
             return <Loading/>
