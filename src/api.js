@@ -21,7 +21,7 @@ export const serverAPI = {
                 data: questions
             })
             // reject('server dont answer...')
-        }, 2000)
+        }, 500)
     }),
     authorising: ({email, password}) => new Promise((resolve, reject) => {
         setTimeout(() => {
@@ -33,6 +33,6 @@ export const serverAPI = {
                 }
             })
             // reject('Incorrect email or password!!!')
-        }, 2000)
+        }, 500)
     }),
 };
