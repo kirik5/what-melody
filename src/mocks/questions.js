@@ -2,7 +2,7 @@ const questions = [{
     "type": "artist",
     "song": {
         "artist": "Endless Love",
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Dirty_Mac.mp3"
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3"
     },
     "answers": [{
         "picture": "https://htmlacademy-react-2.appspot.com/guess-melody/static/artist/Endless_Love.jpg",
@@ -18,7 +18,7 @@ const questions = [{
     "type": "artist",
     "song": {
         "artist": "Endless Love",
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Dirty_Mac.mp3"
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3"
     },
     "answers": [{
         "picture": "https://htmlacademy-react-2.appspot.com/guess-melody/static/artist/Endless_Love.jpg",
@@ -34,7 +34,7 @@ const questions = [{
     "type": "artist",
     "song": {
         "artist": "Unicorn Heads",
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Acoustic_Circles.mp3"
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3"
     },
     "answers": [{
         "picture": "https://htmlacademy-react-2.appspot.com/guess-melody/static/artist/Density_n_Time.jpg",
@@ -50,105 +50,105 @@ const questions = [{
     "type": "genre",
     "genre": "country",
     "answers": [{
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Mob_Battle.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "alternative"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Renegade_Jubilee.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "electronic"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Memories_Station_of_Tomorrow.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "alternative"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Whaling_City.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "country"
     }]
 }, {
     "type": "genre",
     "genre": "country",
     "answers": [{
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Dub_Spirit.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "reggae"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Blue_Whale.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "alternative"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Azure.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "electronic"
-    }, {"src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Parkside.mp3", "genre": "country"}]
+    }, {"src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3", "genre": "country"}]
 }, {
     "type": "genre",
     "genre": "electronic",
     "answers": [{
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Azure.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "electronic"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Mob_Battle.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "alternative"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Clean_Break.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "electronic"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Renegade_Jubilee.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "electronic"
     }]
 }, {
     "type": "genre",
     "genre": "reggae",
     "answers": [{
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Nothin_Yet.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "alternative"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Bark.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "reggae"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Memories_Station_of_Tomorrow.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "alternative"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Renegade_Jubilee.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "electronic"
     }]
 }, {
     "type": "genre",
     "genre": "electronic",
     "answers": [{
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Azure.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "electronic"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Weak_Knight.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "electronic"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Clean_Break.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "electronic"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Mob_Battle.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "alternative"
     }]
 }, {
     "type": "genre",
     "genre": "reggae",
     "answers": [{
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Mob_Battle.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "alternative"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Blue_Whale.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "alternative"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Dirty_Mac.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "country"
-    }, {"src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Addis_Ababa.mp3", "genre": "reggae"}]
+    }, {"src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3", "genre": "reggae"}]
 }, {
     "type": "genre",
     "genre": "country",
     "answers": [{
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Dirty_Mac.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "country"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Whaling_City.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "country"
     }, {
-        "src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Parkside.mp3",
+        "src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3",
         "genre": "country"
-    }, {"src": "https://htmlacademy-react-2.appspot.com/guess-melody/static/music/Azure.mp3", "genre": "electronic"}]
+    }, {"src": "https://web.archive.org/web/20070205234055/http://www.navyband.navy.mil/anthems/ANTHEMS/Albania.mp3", "genre": "electronic"}]
 }]
 
 export default questions;
